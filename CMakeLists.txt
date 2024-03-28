@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(fast_gicp)
+set(CMAKE_CXX_STANDARD 20)
 
 option(BUILD_VGICP_CUDA "Build GPU-powered VGICP" OFF)
 option(BUILD_apps "Build application programs" ON)
@@ -196,4 +197,11 @@ elseif (ament_cmake_FOUND)
       DIRECTORY "include/"
       DESTINATION include
     )
+else()
+  install(TARGETS ${PROJECT_NAME}
+      LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+
+  install(DIRECTORY include/
+      DESTINATION ${CMAKE_INSTALL_PREFIX}/include
+    FILES_MATCHING PATTERN "*.hpp")
 endif()
